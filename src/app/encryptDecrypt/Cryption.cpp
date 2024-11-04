@@ -4,6 +4,7 @@
 
 int executeCryption(const std::string& taskData) {
 
+    //de-serialize
     Task task = Task::fromString(taskData);
 
     ReadEnv env;

@@ -24,6 +24,7 @@ struct Task {
     //we are doing this to pass the task from process management to child process using serialization and de-serialization
     std::string toString() const {
 
+        //output stringstream
         std::ostringstream oss;
         oss << filePath << "," << (action == Action::ENCRYPT ? "ENCRYPT" : "DECRYPT");
 

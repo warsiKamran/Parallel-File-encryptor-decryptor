@@ -12,7 +12,7 @@ bool ProcessManagement::submitToQueue(std::unique_ptr<Task> task) {
     return true;
 }
 
-//consuming tasks from the queue refer the diag.
+//consuming tasks from the queue and then making child process refer the diag.
 void ProcessManagement::executeTasks() {
 
     while (!taskQueue.empty()){
