@@ -1,6 +1,8 @@
 #include "Cryption.hpp"
 #include "../ProcessManagement/Task.hpp"
 #include "../fileHandling/ReadEnv.cpp"
+#include<ctime>
+#include<iomanip>
 
 int executeCryption(const std::string& taskData) {
 
@@ -40,6 +42,11 @@ int executeCryption(const std::string& taskData) {
 
         task.f_stream.close();
     }
+
+    std:: time_t t = std::time(nullptr);
+    std::tm* now = std::localtime(&t);
+
+    std::cout<<"Exiting encryption/decryption at : "<<std::put_time(now, "%Y-%m-%d %H:%M:%S")<<std::endl;
 
     return 0;
 }
