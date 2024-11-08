@@ -2,34 +2,39 @@
 #define PROCESS_MANAGEMENT_HPP
 
 #include "Task.hpp"
-#include <queue>
 #include <memory>
-#include<atomic>
+#include <mutex>
+#include <atomic>
+#include <semaphore.h>
 
 class ProcessManagement{
 
-    public:
-        ProcessManagement();
-        bool submitToQueue(std::unique_ptr<Task> task);
-        void executeTasks();
+    sem_t* itemsSemaphore;
+    sem_t* emptySlotsSemaphore;
 
-    private:
-        // size is an atomic variable, which is crucial for safe access and modification in a concurrent, multi-threaded, or multi-process environment.
-        struct SharedMemory{
+public:
 
-            std::atomic<int> size;
-            char tasks[1000][256];
-            int front;
-            int rear;
+    ProcessManagement();
+    ~ProcessManagement();
+    bool submitToQueue(std::unique_ptr<Task> task);
+    void executeTask();
 
-            void printSharedMemory(){
-                std::cout<<size<<std::endl;
-            }
-        };
+private:
 
-        SharedMemory* sharedMem;
-        int shmFd;
-        const char* SHM_NAME = "/my_queue";
+    // size is an atomic variable, which is crucial for safe access and modification in a concurrent, multi-threaded, or multi-process environment.
+    //1000 files can be stored each containing 256 bytes
+    struct SharedMemory {
+
+        std::atomic<int> size;
+        char tasks[1000][256];
+        int front;
+        int rear;
+    };
+
+    SharedMemory* sharedMem;
+    int shmFd;
+    const char* SHM_NAME = "/my_queue";
+    std::mutex queueLock;
 };
 
 #endif
