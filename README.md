@@ -19,11 +19,11 @@ This project is a high-performance file encryptor and decryptor implemented in C
 1. **Clone the Repository**
    ```bash
    git clone https://github.com/warsiKamran/Parallel-File-encryptor-decryptor.git
-   cd ParallelFileEncryptorDecryptor
    ```
 
 2. **Compile the Project**
    ```bash
+   cd ParallelFileEncryptorDecryptor
    make clean
    make
    ./encrypt_decrypt
