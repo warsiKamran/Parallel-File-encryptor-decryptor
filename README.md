@@ -21,7 +21,7 @@ To encrypt and decrypt the files, use the following commands.
 
 1. Encrypt a File
 ```bash
-./encryptor_decryptor encrypt <input_file> <otput_file>
+./encryptor_decryptor encrypt <input_file> <output_file>
 ```
 2. Decrypt a File
 ```bash
